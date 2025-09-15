@@ -3,75 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Contacto - Prueba</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Formulario de Contacto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>📧 Formulario de Contacto</h1>
-            <p>Prueba de funcionalidad con Formspree</p>
-        </header>
-
-        <main>
-            <div class="form-wrapper">
-                <form action="https://formspree.io/f/mgvlblrv" method="POST" id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nombre completo:</label>
-                        <input type="text" id="name" name="name" placeholder="Salomon" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">salomonfcarrasco@gmail.com:</label>
-                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Asunto:</label>
-                        <input type="text" id="subject" name="subject" placeholder="Prueba" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Mensaje:</label>
-                        <textarea id="message" name="message" rows="5" placeholder="TTT piso 4" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        <span class="btn-text">Enviar Mensaje</span>
-                        <span class="btn-loading" style="display: none;">Enviando...</span>
-                    </button>
-                </form>
-
-                <div id="success-message" class="success-message" style="display: none;">
-                    <h3>✅ ¡Mensaje enviado!</h3>
-                    <p>Te responderemos pronto. Gracias por contactarnos.</p>
-                </div>
+        <h1>📧 Formulario de Contacto</h1>
+        
+        <!-- URL CORRECTA CON TU ID REAL -->
+        <form action="https://formspree.io/f/mgvlblrv" method="POST" id="contact-form">
+            <div class="form-group">
+                <label for="name">Nombre completo:</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre" required>
             </div>
-        </main>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Asunto:</label>
+                <input type="text" id="subject" name="subject" placeholder="Asunto del mensaje" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            </div>
+            
+            <button type="submit">Enviar Mensaje</button>
+        </form>
 
-        <footer>
-            <p>Página de prueba - Formulario con Formspree</p>
-        </footer>
+        <div id="success-message" class="success-message">
+            <h3>✅ ¡Mensaje enviado con éxito!</h3>
+            <p>Te responderemos pronto. Gracias por contactarnos.</p>
+        </div>
     </div>
 
     <script>
-        // Script simple para mostrar feedback al usuario
         document.getElementById('contact-form').addEventListener('submit', function(e) {
-            const submitBtn = document.querySelector('.submit-btn');
-            const btnText = document.querySelector('.btn-text');
-            const btnLoading = document.querySelector('.btn-loading');
+            e.preventDefault();
             
-            // Mostrar estado de carga
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            submitBtn.disabled = true;
+            // Mostrar mensaje de éxito
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('contact-form').style.display = 'none';
             
-            // Simular delay para ver el efecto (en producción esto es automático)
-            setTimeout(function() {
-                // Ocultar formulario y mostrar mensaje de éxito
-                document.getElementById('contact-form').style.display = 'none';
-                document.getElementById('success-message').style.display = 'block';
-            }, 1500);
+            // También enviar el formulario a Formspree
+            this.submit();
         });
     </script>
 </body>
