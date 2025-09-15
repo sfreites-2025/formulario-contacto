@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto - Prueba</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📧 Formulario de Contacto</h1>
+            <p>Prueba de funcionalidad con Formspree</p>
+        </header>
+
+        <main>
+            <div class="form-wrapper">
+                <form action="https://formspree.io/f/your-form-id-here" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nombre completo:</label>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Asunto:</label>
+                        <input type="text" id="subject" name="subject" placeholder="Asunto del mensaje" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Enviar Mensaje</span>
+                        <span class="btn-loading" style="display: none;">Enviando...</span>
+                    </button>
+                </form>
+
+                <div id="success-message" class="success-message" style="display: none;">
+                    <h3>✅ ¡Mensaje enviado!</h3>
+                    <p>Te responderemos pronto. Gracias por contactarnos.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Página de prueba - Formulario con Formspree</p>
+        </footer>
+    </div>
+
+    <script>
+        // Script simple para mostrar feedback al usuario
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            const submitBtn = document.querySelector('.submit-btn');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+            
+            // Mostrar estado de carga
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            // Simular delay para ver el efecto (en producción esto es automático)
+            setTimeout(function() {
+                // Ocultar formulario y mostrar mensaje de éxito
+                document.getElementById('contact-form').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
